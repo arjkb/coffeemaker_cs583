@@ -21,11 +21,13 @@ You're all set to make changes to the code!
 
 #### When you're ready to push
 1. Make sure you're on the `develop` branch. If you worked on other branches for your local development, merge those branches into the `develop` branch.
+
 2. Use `git pull` to fetch and merge changes from GitHub onto your local repo. This is so that you don't inadvertently overwrite the code on GitHub.
 ```
 git pull
 ```
 Fix merge conflicts if any.
+
 3. Push to the `develop` branch.
 ```
 git push -u origin develop
