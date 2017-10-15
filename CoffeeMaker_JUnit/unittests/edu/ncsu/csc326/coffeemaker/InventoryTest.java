@@ -79,4 +79,15 @@ public class InventoryTest extends TestCase {
 
         }
     }
+
+    // negative test case -- Arjun Krishna Babu
+    public void testAddInventory_negative_2()   {
+        // attempt to add non-integer values to inventory
+        try {
+            cm.addInventory("1.2", "3.4", "5.6", "7.8");
+            fail("InventoryException should be thrown for addInventory(1.2, 3.4, 5.6, 7.8)");
+        } catch (InventoryException e)  {
+            // success if thrown
+        }
+    }
 }
