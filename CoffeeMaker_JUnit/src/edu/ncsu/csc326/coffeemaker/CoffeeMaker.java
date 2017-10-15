@@ -113,4 +113,8 @@ public class CoffeeMaker {
 	public synchronized int getInventory_coffee()	{
 		return inventory.getCoffee();
 	}
+
+	public synchronized int getInventory_milk()	{
+		return inventory.getMilk();
+	}
 }
