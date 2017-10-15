@@ -22,6 +22,15 @@ public class InventoryTest extends TestCase {
         }
     }
 
+    // positive test case -- Arjun Krishna Babu
+    public void testAddInventory_positive_2()   {
+        try {
+            cm.addInventory("0", "0", "0", "0");
+        } catch (InventoryException e)  {
+            fail("InventoryException for addInventory(0,0,0,0)");
+        }
+    }
+
     // Negative test case -- Arjun Krishna Babu
     public void testAddInventory_negative_1()  {
         try {
