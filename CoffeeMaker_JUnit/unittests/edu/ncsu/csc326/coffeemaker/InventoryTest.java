@@ -21,4 +21,15 @@ public class InventoryTest extends TestCase {
             fail("InventoryException for addInventory(3,4,5,6)");
         }
     }
+
+    // Negative test case -- Arjun Krishna Babu
+    public void testAddInventory_negative_1()  {
+        try {
+            cm.addInventory("-3", "-4", "-5", "-6");
+            fail("InventoryException should be thrown for addInventory(-3, -4, -5, -6)");
+        } catch (InventoryException e) {
+            // success if thrown
+
+        }
+    }
 }
