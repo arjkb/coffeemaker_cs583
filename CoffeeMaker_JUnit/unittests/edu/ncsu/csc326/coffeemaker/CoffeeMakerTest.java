@@ -1,6 +1,5 @@
 package edu.ncsu.csc326.coffeemaker;
 
-import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
 import junit.framework.TestCase;
 
 /**
@@ -57,23 +56,6 @@ public class CoffeeMakerTest extends TestCase {
 		r4.setPrice("65");
 		
 		super.setUp();
-	}
-	
-	public void testAddInventory() {
-		try {
-			cm.addInventory("4","7","0","9");
-		} catch (InventoryException e) {
-			fail("InventoryException should not be thrown");
-		}
-	}
-	
-	public void testAddInventoryException() {
-		try {
-			cm.addInventory("4", "-1", "asdf", "3");
-			fail("InventoryException should be thrown");
-		} catch (InventoryException e) {
-			//success if thrown
-		}
 	}
 	
 	public void testMakeCoffee() {
