@@ -117,4 +117,8 @@ public class CoffeeMaker {
 	public synchronized int getInventory_milk()	{
 		return inventory.getMilk();
 	}
+
+	public synchronized int getInventory_sugar()	{
+		return inventory.getSugar();
+	}
 }
