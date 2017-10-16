@@ -92,4 +92,35 @@ public class CoffeeMakerTest extends TestCase {
         // Insufficient money. Should return what was originally paid
         assertEquals(20, cm.makeCoffee(0, 20));
     }
+
+    // positive test -- Arjun Krishna Babu
+    public void test_purchase_inventoryDecrement() throws Exception {
+        /*  Test that the inventory values get decremented after purchasing items */
+
+        // set inventory values
+        cm.setInventory_chocolate(100);
+        cm.setInventory_coffee(100);
+        cm.setInventory_milk(100);
+        cm.setInventory_sugar(100);
+
+        // setup a sample recipe
+        // setup for a sample recipe
+        recipe = new Recipe();
+        recipe.setName("Coffee");
+        recipe.setAmtChocolate("10");
+        recipe.setAmtCoffee("20");
+        recipe.setAmtMilk("30");
+        recipe.setAmtSugar("40");
+        recipe.setPrice("50");
+
+        cm.addRecipe(recipe);
+
+        int change = cm.makeCoffee(0, 50);
+
+        // check if inventory values were decremented
+        assertEquals(100-10, cm.getInventory_chocolate());
+        assertEquals(100-20, cm.getInventory_coffee());
+        assertEquals(100-30, cm.getInventory_milk());
+        assertEquals(100-40, cm.getInventory_sugar());
+    }
 }
