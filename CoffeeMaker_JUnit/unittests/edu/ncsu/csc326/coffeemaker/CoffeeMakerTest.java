@@ -57,7 +57,24 @@ public class CoffeeMakerTest extends TestCase {
 		
 		super.setUp();
 	}
-	
+
+	// positive test cases -- Arjun Krishna Babu
+	public void test_MakeCoffee_positive()  {
+	    // set the inventory
+        cm.setInventory_chocolate(100);
+        cm.setInventory_coffee(100);
+        cm.setInventory_milk(100);
+        cm.setInventory_sugar(100);
+
+	    cm.addRecipe(r1);
+	    cm.addRecipe(r2);
+	    cm.addRecipe(r3);
+	    cm.addRecipe(r4);
+
+	    // exact money. Should return 0
+	    assertEquals(0, cm.makeCoffee(0, 50));
+
+    }
 //	public void testMakeCoffee() {
 //		cm.addRecipe(r1);
 //		assertEquals(25, cm.makeCoffee(0, 75));
