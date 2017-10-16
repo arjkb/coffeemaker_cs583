@@ -125,4 +125,21 @@ public class CoffeeMaker {
 	public synchronized int getInventory_chocolate()	{
 		return inventory.getChocolate();
 	}
+
+	// setters
+	public synchronized void setInventory_coffee(int coffee)  {
+	    inventory.setCoffee(coffee);
+    }
+
+    public synchronized void setInventory_milk(int milk)  {
+        inventory.setMilk(milk);
+    }
+
+    public synchronized void setInventory_sugar(int sugar)  {
+        inventory.setSugar(sugar);
+    }
+
+    public synchronized void setInventory_chocolate(int chocolate)  {
+        inventory.setChocolate(chocolate);
+    }
 }
