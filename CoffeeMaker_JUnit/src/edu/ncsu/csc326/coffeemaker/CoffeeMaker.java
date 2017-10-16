@@ -108,4 +108,38 @@ public class CoffeeMaker {
 	public synchronized Recipe[] getRecipes() {
 		return recipeBook.getRecipes();
 	}
+
+	/* following methods defined by Arjun Krishna Babu, to get access to variables in inventory object */
+	public synchronized int getInventory_coffee()	{
+		return inventory.getCoffee();
+	}
+
+	public synchronized int getInventory_milk()	{
+		return inventory.getMilk();
+	}
+
+	public synchronized int getInventory_sugar()	{
+		return inventory.getSugar();
+	}
+
+	public synchronized int getInventory_chocolate()	{
+		return inventory.getChocolate();
+	}
+
+	// setters
+	public synchronized void setInventory_coffee(int coffee)  {
+	    inventory.setCoffee(coffee);
+    }
+
+    public synchronized void setInventory_milk(int milk)  {
+        inventory.setMilk(milk);
+    }
+
+    public synchronized void setInventory_sugar(int sugar)  {
+        inventory.setSugar(sugar);
+    }
+
+    public synchronized void setInventory_chocolate(int chocolate)  {
+        inventory.setChocolate(chocolate);
+    }
 }
