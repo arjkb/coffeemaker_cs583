@@ -81,10 +81,8 @@ public class CoffeeMakerTest extends TestCase {
 	    // exact money. Should return 0
 	    assertEquals(0, cm.makeCoffee(0, 50));
 
-    }
-//	public void testMakeCoffee() {
-//		cm.addRecipe(r1);
-//		assertEquals(25, cm.makeCoffee(0, 75));
-//	}
+	    // more money. Should return balance.
+        assertEquals(10, cm.makeCoffee(0, 60));
 
+    }
 }
