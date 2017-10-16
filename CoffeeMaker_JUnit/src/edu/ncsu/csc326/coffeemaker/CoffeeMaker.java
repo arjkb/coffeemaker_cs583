@@ -134,4 +134,10 @@ public class CoffeeMaker {
     public synchronized void setInventory_milk(int milk)  {
         inventory.setMilk(milk);
     }
+
+    public synchronized void setInventory_sugar(int sugar)  {
+        inventory.setSugar(sugar);
+    }
+
+
 }
