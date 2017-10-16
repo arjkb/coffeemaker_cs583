@@ -35,8 +35,6 @@ public class InventoryTest extends TestCase {
     public void testAddInventoryTwice_positive_3() throws InventoryException {
         // add to inventory twice, and see if the values in inventory add up
 
-        final int INITIAL_UNITS = 15;
-
         // set all inventory values to 0
         cm.setInventory_chocolate(0);
         cm.setInventory_coffee(0);
@@ -77,4 +75,9 @@ public class InventoryTest extends TestCase {
             // success if thrown
         }
     }
+
+//    // positive test case -- Arjun Krishna Babu
+//    public void test_checkInventory()   {
+//
+//    }
 }
