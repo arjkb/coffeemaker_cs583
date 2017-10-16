@@ -104,7 +104,6 @@ public class CoffeeMakerTest extends TestCase {
         cm.setInventory_sugar(100);
 
         // setup a sample recipe
-        // setup for a sample recipe
         recipe = new Recipe();
         recipe.setName("Coffee");
         recipe.setAmtChocolate("10");
@@ -122,5 +121,31 @@ public class CoffeeMakerTest extends TestCase {
         assertEquals(100-20, cm.getInventory_coffee());
         assertEquals(100-30, cm.getInventory_milk());
         assertEquals(100-40, cm.getInventory_sugar());
+    }
+
+    // positive test -- Arjun Krishna Babu
+    public void test_purchase_insuffIngredients() throws Exception  {
+        /* check that purchase does not happen if there are insufficient ingredients */
+
+        // set inventory values
+        cm.setInventory_chocolate(5);
+        cm.setInventory_coffee(5);
+        cm.setInventory_milk(5);
+        cm.setInventory_sugar(5);
+
+        // setup a sample recipe that require more ingredients than that available in inventory
+        recipe = new Recipe();
+        recipe.setName("Coffee");
+        recipe.setAmtChocolate("10");
+        recipe.setAmtCoffee("20");
+        recipe.setAmtMilk("30");
+        recipe.setAmtSugar("40");
+        recipe.setPrice("50");
+
+        cm.addRecipe(recipe);
+
+        // Exact money. Should return the amount paid by the user (because
+        // purchase did not happen due to insufficient ingredients).
+        assertEquals(50,cm.makeCoffee(0, 50));
     }
 }
