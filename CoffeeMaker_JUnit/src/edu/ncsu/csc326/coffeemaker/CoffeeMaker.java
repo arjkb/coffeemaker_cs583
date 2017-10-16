@@ -85,8 +85,16 @@ public class CoffeeMaker {
      */
     public synchronized int makeCoffee(int recipeToPurchase, int amtPaid) {
         int change = 0;
-        
-        if (getRecipes()[recipeToPurchase] == null) {
+
+        if (recipeToPurchase > getRecipes().length)    {
+            // bug fix by Arjun Krishna Babu.
+
+            // Ensure recipeToPurchase exists in the list of recipes
+            // cancel transaction otherwise (ie., if this block is executed)
+
+            change = amtPaid;
+
+        } else if (getRecipes()[recipeToPurchase] == null) {
         	change = amtPaid;
         } else if (getRecipes()[recipeToPurchase].getPrice() <= amtPaid) {
         	if (inventory.useIngredients(getRecipes()[recipeToPurchase])) {
