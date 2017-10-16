@@ -139,5 +139,7 @@ public class CoffeeMaker {
         inventory.setSugar(sugar);
     }
 
-
+    public synchronized void setInventory_chocolate(int chocolate)  {
+        inventory.setChocolate(chocolate);
+    }
 }
