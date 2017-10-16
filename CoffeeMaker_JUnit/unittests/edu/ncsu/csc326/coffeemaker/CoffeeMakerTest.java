@@ -164,6 +164,5 @@ public class CoffeeMakerTest extends TestCase {
 
         final int AMOUNT_PAID = 50;
         assertEquals(AMOUNT_PAID, cm.makeCoffee(NON_EXISTENT_RECIPE, AMOUNT_PAID));
-
     }
 }

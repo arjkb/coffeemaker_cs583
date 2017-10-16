@@ -13,8 +13,10 @@ public class InventoryTest extends TestCase {
         super.setUp();
     }
 
-    // Positive Test Case -- Arjun Krishna Babu
+    // positive test -- Arjun Krishna Babu
     public void testAddInventory_positive_1()  {
+        /* Ensure positive values can be added to the inventory */
+
         try {
             cm.addInventory("3", "4", "5", "6");
         } catch (InventoryException e) {
@@ -22,8 +24,9 @@ public class InventoryTest extends TestCase {
         }
     }
 
-    // positive test case -- Arjun Krishna Babu
+    // positive test -- Arjun Krishna Babu
     public void testAddInventory_positive_2()   {
+        /* Ensure 0 values can be added to the inventory */
         try {
             cm.addInventory("0", "0", "0", "0");
         } catch (InventoryException e)  {
@@ -54,20 +57,22 @@ public class InventoryTest extends TestCase {
         assertEquals(7+8, cm.getInventory_chocolate());
     }
 
-    // Negative test case -- Arjun Krishna Babu
+    // negative test -- Arjun Krishna Babu
     public void testAddInventory_negative_1()  {
+        /* Ensure negative values cannot be added to the inventory */
+
         try {
             cm.addInventory("-3", "-4", "-5", "-6");
             fail("InventoryException should be thrown for addInventory(-3, -4, -5, -6)");
         } catch (InventoryException e) {
             // success if thrown
-
         }
     }
 
-    // negative test case -- Arjun Krishna Babu
+    // negative test -- Arjun Krishna Babu
     public void testAddInventory_negative_2()   {
-        // attempt to add non-integer values to inventory
+        /* Ensure non-integer values cannot be added to the inventory */
+
         try {
             cm.addInventory("1.2", "3.4", "5.6", "7.8");
             fail("InventoryException should be thrown for addInventory(1.2, 3.4, 5.6, 7.8)");
@@ -76,7 +81,7 @@ public class InventoryTest extends TestCase {
         }
     }
 
-    // positive test case -- Arjun Krishna Babu
+    // positive test -- Arjun Krishna Babu
     public void test_checkInventory() throws InventoryException {
         /* ensure value returned by checkInventory() is as expected */
 
@@ -85,7 +90,6 @@ public class InventoryTest extends TestCase {
         cm.setInventory_coffee(0);
         cm.setInventory_milk(0);
         cm.setInventory_sugar(0);
-
 
         // coffee=2, milk=4, sugar=6, chocolate=8
         cm.addInventory("2", "4", "6", "8");
