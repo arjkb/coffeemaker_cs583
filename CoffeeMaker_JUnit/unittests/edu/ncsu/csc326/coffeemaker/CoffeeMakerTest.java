@@ -56,27 +56,32 @@ public class CoffeeMakerTest extends TestCase {
 		r4.setAmtSugar("1");
 		r4.setPrice("65");
 
-		// setup for a sample recipe
-        recipe = new Recipe();
-        recipe.setName("White Mocha");
-        recipe.setAmtChocolate("1");
-        recipe.setAmtCoffee("2");
-        recipe.setAmtMilk("3");
-        recipe.setAmtMilk("4");
-        recipe.setPrice("50");
-		
 		super.setUp();
 	}
 
 	// positive test cases -- Arjun Krishna Babu
-	public void test_MakeCoffee_positive()  {
+	public void test_MakeCoffee_positive() throws Exception {
+        /*  Test makeCoffee() method with money less than, equal to, and
+            greater than the price of the beverage
+         */
+
 	    // set the inventory
         cm.setInventory_chocolate(100);
         cm.setInventory_coffee(100);
         cm.setInventory_milk(100);
         cm.setInventory_sugar(100);
 
-	    cm.addRecipe(recipe);
+        // setup for a sample recipe
+        recipe = new Recipe();
+        recipe.setName("Coffee");
+        recipe.setAmtChocolate("1");
+        recipe.setAmtCoffee("2");
+        recipe.setAmtMilk("3");
+        recipe.setAmtMilk("4");
+        recipe.setPrice("50");
+
+
+        cm.addRecipe(recipe);
 
 	    // exact money. Should return 0
 	    assertEquals(0, cm.makeCoffee(0, 50));
@@ -86,6 +91,5 @@ public class CoffeeMakerTest extends TestCase {
 
         // Insufficient money. Should return what was originally paid
         assertEquals(20, cm.makeCoffee(0, 20));
-
     }
 }
