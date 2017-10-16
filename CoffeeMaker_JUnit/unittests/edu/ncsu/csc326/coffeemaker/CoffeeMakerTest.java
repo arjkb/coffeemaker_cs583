@@ -84,5 +84,8 @@ public class CoffeeMakerTest extends TestCase {
 	    // more money. Should return balance.
         assertEquals(10, cm.makeCoffee(0, 60));
 
+        // Insufficient money. Should return what was originally paid
+        assertEquals(20, cm.makeCoffee(0, 20));
+
     }
 }
