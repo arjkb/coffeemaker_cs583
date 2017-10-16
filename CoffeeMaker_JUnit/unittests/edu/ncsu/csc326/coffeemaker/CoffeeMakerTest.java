@@ -15,8 +15,9 @@ public class CoffeeMakerTest extends TestCase {
 	private Recipe r2;
 	private Recipe r3;
 	private Recipe r4;
+    private Recipe recipe;
 
-	protected void setUp() throws Exception {
+    protected void setUp() throws Exception {
 		cm = new CoffeeMaker();
 		
 		//Set up for r1
@@ -54,6 +55,15 @@ public class CoffeeMakerTest extends TestCase {
 		r4.setAmtMilk("1");
 		r4.setAmtSugar("1");
 		r4.setPrice("65");
+
+		// setup for a sample recipe
+        recipe = new Recipe();
+        recipe.setName("White Mocha");
+        recipe.setAmtChocolate("1");
+        recipe.setAmtCoffee("2");
+        recipe.setAmtMilk("3");
+        recipe.setAmtMilk("4");
+        recipe.setPrice("50");
 		
 		super.setUp();
 	}
@@ -66,10 +76,7 @@ public class CoffeeMakerTest extends TestCase {
         cm.setInventory_milk(100);
         cm.setInventory_sugar(100);
 
-	    cm.addRecipe(r1);
-	    cm.addRecipe(r2);
-	    cm.addRecipe(r3);
-	    cm.addRecipe(r4);
+	    cm.addRecipe(recipe);
 
 	    // exact money. Should return 0
 	    assertEquals(0, cm.makeCoffee(0, 50));
