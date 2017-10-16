@@ -148,4 +148,22 @@ public class CoffeeMakerTest extends TestCase {
         // purchase did not happen due to insufficient ingredients).
         assertEquals(50,cm.makeCoffee(0, 50));
     }
+
+    // negative test -- Arjun Krishna Babu
+    public void test_purchase_nonExistentBeverage() throws Exception   {
+        /*  Ensure purchase does not happen if
+            the beverage does not exist */
+
+        // set inventory values
+        cm.setInventory_chocolate(100);
+        cm.setInventory_coffee(100);
+        cm.setInventory_milk(100);
+        cm.setInventory_sugar(100);
+
+        final int NON_EXISTENT_RECIPE = 1000;
+
+        final int AMOUNT_PAID = 50;
+        assertEquals(AMOUNT_PAID, cm.makeCoffee(NON_EXISTENT_RECIPE, AMOUNT_PAID));
+
+    }
 }
