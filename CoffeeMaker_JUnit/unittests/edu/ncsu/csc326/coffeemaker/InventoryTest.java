@@ -76,8 +76,22 @@ public class InventoryTest extends TestCase {
         }
     }
 
-//    // positive test case -- Arjun Krishna Babu
-//    public void test_checkInventory()   {
-//
-//    }
+    // positive test case -- Arjun Krishna Babu
+    public void test_checkInventory() throws InventoryException {
+        /* ensure value returned by checkInventory() is as expected */
+
+        // set all inventory values to 0
+        cm.setInventory_chocolate(0);
+        cm.setInventory_coffee(0);
+        cm.setInventory_milk(0);
+        cm.setInventory_sugar(0);
+
+
+        // coffee=2, milk=4, sugar=6, chocolate=8
+        cm.addInventory("2", "4", "6", "8");
+
+        final String EXPECTED = "Coffee: 2\nMilk: 4\nSugar: 6\nChocolate: 8\n";
+
+        assertEquals(EXPECTED, cm.checkInventory());
+    }
 }
