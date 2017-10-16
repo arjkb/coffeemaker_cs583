@@ -31,42 +31,29 @@ public class InventoryTest extends TestCase {
         }
     }
 
-    // positive test case -- Arjun Krishna Babu
-    public void testAddInventory_positive_3()   {
+    // positive test -- Arjun Krishna Babu
+    public void testAddInventoryTwice_positive_3() throws InventoryException {
         // add to inventory twice, and see if the values in inventory add up
 
         final int INITIAL_UNITS = 15;
 
-        final String[] chocolate = {"1", "2"};
-        final String[] coffee = {"3", "4"};
-        final String[] milk = {"5", "6"};
-        final String[] sugar = {"7", "8"};
+        // set all inventory values to 0
+        cm.setInventory_chocolate(0);
+        cm.setInventory_coffee(0);
+        cm.setInventory_milk(0);
+        cm.setInventory_sugar(0);
 
-        Inventory inventory = new Inventory();
-        try {
-            inventory.addChocolate(chocolate[0]);
-            inventory.addCoffee(coffee[0]);
-            inventory.addMilk(milk[0]);
-            inventory.addSugar(sugar[0]);
+        // coffee=1, milk=3, sugar=5, chocolate=7
+        cm.addInventory("1", "3", "5", "7");
 
-            inventory.addChocolate(chocolate[1]);
-            inventory.addCoffee(coffee[1]);
-            inventory.addMilk(milk[1]);
-            inventory.addSugar(sugar[1]);
+        // coffee=2, milk=4, sugar=6, chocolate=8
+        cm.addInventory("2", "4", "6", "8");
 
-        } catch (InventoryException e)  {
-            fail("InventoryException in positive test case was not expected");
-        }
-
-        final int TOT_EXP_CHOCOLATE = INITIAL_UNITS + Integer.parseInt(chocolate[0]) + Integer.parseInt(chocolate[1]);
-        final int TOT_EXP_COFFEE = INITIAL_UNITS + Integer.parseInt(coffee[0]) + Integer.parseInt(coffee[1]);
-        final int TOT_EXP_MILK = INITIAL_UNITS + Integer.parseInt(milk[0]) + Integer.parseInt(milk[1]);
-        final int TOT_EXP_SUGAR = INITIAL_UNITS + Integer.parseInt(sugar[0]) + Integer.parseInt(sugar[1]);
-
-        assertEquals(TOT_EXP_CHOCOLATE, inventory.getChocolate());
-        assertEquals(TOT_EXP_COFFEE, inventory.getCoffee());
-        assertEquals(TOT_EXP_MILK, inventory.getMilk());
-        assertEquals(TOT_EXP_SUGAR, inventory.getSugar());
+        // verify that the inventory addition is as expected
+        assertEquals(1+2, cm.getInventory_coffee());
+        assertEquals(3+4, cm.getInventory_milk());
+        assertEquals(5+6, cm.getInventory_sugar());
+        assertEquals(7+8, cm.getInventory_chocolate());
     }
 
     // Negative test case -- Arjun Krishna Babu
