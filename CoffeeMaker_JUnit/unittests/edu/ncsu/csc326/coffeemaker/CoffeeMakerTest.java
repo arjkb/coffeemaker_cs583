@@ -1,6 +1,5 @@
 package edu.ncsu.csc326.coffeemaker;
 
-import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
 import junit.framework.TestCase;
 
 /**
@@ -16,8 +15,9 @@ public class CoffeeMakerTest extends TestCase {
 	private Recipe r2;
 	private Recipe r3;
 	private Recipe r4;
+    private Recipe recipe;
 
-	protected void setUp() throws Exception {
+    protected void setUp() throws Exception {
 		cm = new CoffeeMaker();
 		
 		//Set up for r1
@@ -55,30 +55,115 @@ public class CoffeeMakerTest extends TestCase {
 		r4.setAmtMilk("1");
 		r4.setAmtSugar("1");
 		r4.setPrice("65");
-		
+
 		super.setUp();
 	}
-	
-	public void testAddInventory() {
-		try {
-			cm.addInventory("4","7","0","9");
-		} catch (InventoryException e) {
-			fail("InventoryException should not be thrown");
-		}
-	}
-	
-	public void testAddInventoryException() {
-		try {
-			cm.addInventory("4", "-1", "asdf", "3");
-			fail("InventoryException should be thrown");
-		} catch (InventoryException e) {
-			//success if thrown
-		}
-	}
-	
-	public void testMakeCoffee() {
-		cm.addRecipe(r1);
-		assertEquals(25, cm.makeCoffee(0, 75));
-	}
 
+	// positive test cases -- Arjun Krishna Babu
+	public void test_MakeCoffee_positive() throws Exception {
+        /*  Test makeCoffee() method with money less than, equal to, and
+            greater than the price of the beverage
+         */
+
+	    // set the inventory
+        cm.setInventory_chocolate(100);
+        cm.setInventory_coffee(100);
+        cm.setInventory_milk(100);
+        cm.setInventory_sugar(100);
+
+        // setup for a sample recipe
+        recipe = new Recipe();
+        recipe.setName("Coffee");
+        recipe.setAmtChocolate("1");
+        recipe.setAmtCoffee("2");
+        recipe.setAmtMilk("3");
+        recipe.setAmtSugar("4");
+        recipe.setPrice("50");
+
+
+        cm.addRecipe(recipe);
+
+	    // exact money. Should return 0
+	    assertEquals(0, cm.makeCoffee(0, 50));
+
+	    // more money. Should return balance.
+        assertEquals(10, cm.makeCoffee(0, 60));
+
+        // Insufficient money. Should return what was originally paid
+        assertEquals(20, cm.makeCoffee(0, 20));
+    }
+
+    // positive test -- Arjun Krishna Babu
+    public void test_purchase_inventoryDecrement() throws Exception {
+        /*  Test that the inventory values get decremented after purchasing items */
+
+        // set inventory values
+        cm.setInventory_chocolate(100);
+        cm.setInventory_coffee(100);
+        cm.setInventory_milk(100);
+        cm.setInventory_sugar(100);
+
+        // setup a sample recipe
+        recipe = new Recipe();
+        recipe.setName("Coffee");
+        recipe.setAmtChocolate("10");
+        recipe.setAmtCoffee("20");
+        recipe.setAmtMilk("30");
+        recipe.setAmtSugar("40");
+        recipe.setPrice("50");
+
+        cm.addRecipe(recipe);
+
+        int change = cm.makeCoffee(0, 50);
+
+        // check if inventory values were decremented
+        assertEquals(100-10, cm.getInventory_chocolate());
+        assertEquals(100-20, cm.getInventory_coffee());
+        assertEquals(100-30, cm.getInventory_milk());
+        assertEquals(100-40, cm.getInventory_sugar());
+    }
+
+    // positive test -- Arjun Krishna Babu
+    public void test_purchase_insuffIngredients() throws Exception  {
+        /* check that purchase does not happen if there are insufficient ingredients */
+
+        // set inventory values
+        cm.setInventory_chocolate(5);
+        cm.setInventory_coffee(5);
+        cm.setInventory_milk(5);
+        cm.setInventory_sugar(5);
+
+        // setup a sample recipe that require more ingredients than that available in inventory
+        recipe = new Recipe();
+        recipe.setName("Coffee");
+        recipe.setAmtChocolate("10");
+        recipe.setAmtCoffee("20");
+        recipe.setAmtMilk("30");
+        recipe.setAmtSugar("40");
+        recipe.setPrice("50");
+
+        cm.addRecipe(recipe);
+
+        // Exact money. Should return the amount paid by the user (because
+        // purchase did not happen due to insufficient ingredients).
+        assertEquals(50,cm.makeCoffee(0, 50));
+    }
+
+    // negative test -- Arjun Krishna Babu
+    public void test_purchase_nonExistentBeverage() throws Exception   {
+        /*  Ensure purchase does not happen if
+            the beverage does not exist */
+
+        // set inventory values
+        cm.setInventory_chocolate(100);
+        cm.setInventory_coffee(100);
+        cm.setInventory_milk(100);
+        cm.setInventory_sugar(100);
+
+        final int NON_EXISTENT_RECIPE = 1000;
+
+        final int AMOUNT_PAID = 50;
+        assertEquals(AMOUNT_PAID, cm.makeCoffee(NON_EXISTENT_RECIPE, AMOUNT_PAID));
+
+    }
 }
