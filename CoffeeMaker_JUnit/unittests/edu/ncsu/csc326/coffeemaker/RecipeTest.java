@@ -72,15 +72,15 @@ public class RecipeTest {
         assertTrue(cm.addRecipe(r1));
         assertTrue(cm.addRecipe(r2));
         assertTrue(cm.addRecipe(r3));
-        assertTrue(cm.addRecipe(r4));
-        assertFalse(Arrays.asList(cm.getRecipes()).contains(r1));
+        assertFalse(cm.addRecipe(r4));
+        assertFalse(Arrays.asList(cm.getRecipes()).contains(r4));
     }
 
     @Test
     public void test_AddRecipe_UniqueName(){
         assertTrue(cm.addRecipe(r1));
-        assertFalse(cm.addRecipe(r1));
-        assertTrue(Arrays.asList(cm.getRecipes()).size() == 1);
+        r2.setName(r1.getName());
+        assertFalse(cm.addRecipe(r2));
     }
 
     @Test
@@ -91,7 +91,6 @@ public class RecipeTest {
         r.setAmtCoffee("1");
         r.setAmtMilk("1");
         r.setAmtSugar("1");
-
         exception.expect(RecipeException.class);
         r.setPrice("5.50");
     }
@@ -124,4 +123,43 @@ public class RecipeTest {
         assertTrue(cm.addRecipe(r));
         assertTrue(Arrays.asList(cm.getRecipes()).contains(r));
     }
+
+    @Test
+    public void test_DelRecipe_ContainsRecipe() {
+        assertTrue(cm.addRecipe(r1));
+        assertEquals(r1.getName(),cm.deleteRecipe(0));
+    }
+
+    @Test
+    public void test_DelRecipe_NoRecipe(){
+        assertNull(cm.deleteRecipe(0));
+    }
+
+    @Test
+    public void test_EditRecipe_DifNames(){
+        assertTrue(cm.addRecipe(r1));
+        Recipe r = new Recipe();
+        r.setName(r1.getName() + "edited");
+        assertEquals(r1.getName(), cm.editRecipe(0, r));
+        Recipe rr = cm.getRecipes()[0];
+        assertEquals(0, rr.getAmtChocolate());
+        assertEquals(0, rr.getAmtCoffee());
+        assertEquals(0, rr.getAmtMilk());
+        assertEquals(0, rr.getAmtSugar());
+        assertEquals(0, rr.getPrice());
+    }
+
+    @Test
+    public void test_EditRecipe_SameNames(){
+        assertTrue(cm.addRecipe(r1));
+        Recipe r = new Recipe();
+        r.setName(r1.getName() + "edited");
+        assertNull(cm.editRecipe(0, r));
+    }
+
+    @Test
+    public void test_EditRecipe_Empty(){
+        assertNull(cm.editRecipe(0, r1));
+    }
+
 }
